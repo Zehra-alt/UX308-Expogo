@@ -42,12 +42,17 @@ export default function App() {
   return (
     <View style={styles.container}>
       
-      <Text style={{fontSize: 24}}>☕ Velvet Roast Rewards</Text>
+      <Text style={{fontSize: 26, fontWeight: '600'}}>☕ Velvet Roast Rewards</Text>
       <Text style={{fontSize: 18, marginBottom: 20}}>Points: {points} / 10</Text>
+      <Text style={{color: '#666'}}>Buy 9, get your 10th free ☕</Text>
 
       <TouchableOpacity 
   style={styles.fab} 
-  onPress={() => setChatOpen(true)}
+  onPress={() => {
+  setChatOpen(true);
+  setMessages([]);
+  clearInput();
+}}
 >
   <Text style={{color: 'white', fontSize: 20}}>💬</Text>
 </TouchableOpacity>
@@ -82,7 +87,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#fdf6f0',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -96,7 +101,7 @@ const styles = StyleSheet.create({
     padding: 10,
     marginVertical: 10
   },
-  
+
   fab: {
   position: 'absolute',
   bottom: 30,
