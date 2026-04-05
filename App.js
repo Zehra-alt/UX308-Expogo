@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, TextInput, Button, Modal } from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
 import { handleInput, clearInput } from './Order.js';
 
 export default function App() {
@@ -45,7 +45,12 @@ export default function App() {
       <Text style={{fontSize: 24}}>☕ Velvet Roast Rewards</Text>
       <Text style={{fontSize: 18, marginBottom: 20}}>Points: {points} / 10</Text>
 
-      <Button title="Open Chatbot" onPress={() => setChatOpen(true)} />
+      <TouchableOpacity 
+  style={styles.fab} 
+  onPress={() => setChatOpen(true)}
+>
+  <Text style={{color: 'white', fontSize: 20}}>💬</Text>
+</TouchableOpacity>
 
       <Modal visible={chatOpen} animationType="slide">
         <View style={styles.chatContainer}>
@@ -90,5 +95,17 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     padding: 10,
     marginVertical: 10
-  }
+  },
+  
+  fab: {
+  position: 'absolute',
+  bottom: 30,
+  right: 30,
+  backgroundColor: '#000',
+  width: 60,
+  height: 60,
+  borderRadius: 30,
+  justifyContent: 'center',
+  alignItems: 'center'
+}
 });
