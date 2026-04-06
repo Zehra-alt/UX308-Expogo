@@ -1,3 +1,4 @@
+import { ScrollView } from 'react-native';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
@@ -62,23 +63,25 @@ export default function App() {
 
           <Text style={{fontSize: 20}}>Chatbot</Text>
 
-         {messages.map((msg, index) => {
-  const isUser = msg.startsWith("You:");
+         <ScrollView style={{ flex: 1, marginVertical: 10 }}>
+  {messages.map((msg, index) => {
+    const isUser = msg.startsWith("You:");
 
-  return (
-    <View
-      key={index}
-      style={[
-        styles.messageBubble,
-        isUser ? styles.userBubble : styles.botBubble
-      ]}
-    >
-      <Text style={{ color: isUser ? 'white' : 'black' }}>
-        {msg.replace("You: ", "").replace("Bot: ", "")}
-      </Text>
-    </View>
-  );
-})}
+    return (
+      <View
+        key={index}
+        style={[
+          styles.messageBubble,
+          isUser ? styles.userBubble : styles.botBubble
+        ]}
+      >
+        <Text style={{ color: isUser ? 'white' : 'black' }}>
+          {msg.replace("You: ", "").replace("Bot: ", "")}
+        </Text>
+      </View>
+    );
+  })}
+</ScrollView>
 
           <TextInput
             style={styles.input}
