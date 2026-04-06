@@ -1,3 +1,4 @@
+import { ScrollView } from 'react-native';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, TextInput, Button, Modal, TouchableOpacity } from 'react-native';
@@ -87,8 +88,22 @@ export default function App() {
             placeholder="Type here..."
           />
 
-          <Button title="Send" onPress={sendMessage} />
-          <Button title="Close" onPress={() => setChatOpen(false)} />
+          <View style={styles.inputRow}>
+        <TextInput
+          style={styles.input}
+          value={input}
+          onChangeText={setInput}
+           placeholder="Type your order..."
+        />
+        <TouchableOpacity style={styles.sendButton} onPress={sendMessage}>
+       <Text style={{ color: 'white' }}>Send</Text>
+        </TouchableOpacity>
+          </View>
+
+<TouchableOpacity onPress={() => setChatOpen(false)}>
+  <Text style={{ marginTop: 10, color: '#666' }}>Close</Text>
+</TouchableOpacity>
+          
 
         </View>
       </Modal>
