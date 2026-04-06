@@ -62,9 +62,23 @@ export default function App() {
 
           <Text style={{fontSize: 20}}>Chatbot</Text>
 
-          {messages.map((msg, index) => (
-            <Text key={index}>{msg}</Text>
-          ))}
+         {messages.map((msg, index) => {
+  const isUser = msg.startsWith("You:");
+
+  return (
+    <View
+      key={index}
+      style={[
+        styles.messageBubble,
+        isUser ? styles.userBubble : styles.botBubble
+      ]}
+    >
+      <Text style={{ color: isUser ? 'white' : 'black' }}>
+        {msg.replace("You: ", "").replace("Bot: ", "")}
+      </Text>
+    </View>
+  );
+})}
 
           <TextInput
             style={styles.input}
@@ -112,5 +126,21 @@ const styles = StyleSheet.create({
   borderRadius: 30,
   justifyContent: 'center',
   alignItems: 'center'
+},
+messageBubble: {
+  padding: 10,
+  borderRadius: 15,
+  marginVertical: 5,
+  maxWidth: '80%'
+},
+
+userBubble: {
+  backgroundColor: '#000',
+  alignSelf: 'flex-end'
+},
+
+botBubble: {
+  backgroundColor: '#eee',
+  alignSelf: 'flex-start'
 }
 });
