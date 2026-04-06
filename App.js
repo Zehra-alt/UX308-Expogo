@@ -1,3 +1,4 @@
+import { KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import { ScrollView } from 'react-native';
 import { useState } from 'react';
 import { StatusBar } from 'expo-status-bar';
@@ -59,42 +60,47 @@ export default function App() {
 </TouchableOpacity>
 
       <Modal visible={chatOpen} animationType="slide">
-        <View style={styles.chatContainer}>
+  <KeyboardAvoidingView
+    style={{ flex: 1 }}
+    behavior={Platform.OS === "ios" ? "padding" : "height"}
+  >
+    <View style={styles.chatContainer}>
 
-          <Text style={{fontSize: 20}}>Chatbot</Text>
+      <Text style={{ fontSize: 20 }}>Chatbot</Text>
 
-         <ScrollView style={{ flex: 1, marginVertical: 10 }}>
-  {messages.map((msg, index) => {
-    const isUser = msg.startsWith("You:");
+      <ScrollView style={{ flex: 1, marginVertical: 10 }}>
+        {messages.map((msg, index) => {
+          const isUser = msg.startsWith("You:");
 
-    return (
-      <View
-        key={index}
-        style={[
-          styles.messageBubble,
-          isUser ? styles.userBubble : styles.botBubble
-        ]}
-      >
-        <Text style={{ color: isUser ? 'white' : 'black' }}>
-          {msg.replace("You: ", "").replace("Bot: ", "")}
-        </Text>
-      </View>
-    );
-  })}
-</ScrollView>
+          return (
+            <View
+              key={index}
+              style={[
+                styles.messageBubble,
+                isUser ? styles.userBubble : styles.botBubble
+              ]}
+            >
+              <Text style={{ color: isUser ? 'white' : 'black' }}>
+                {msg.replace("You: ", "").replace("Bot: ", "")}
+              </Text>
+            </View>
+          );
+        })}
+      </ScrollView>
 
-          <TextInput
-            style={styles.input}
-            value={input}
-            onChangeText={setInput}
-            placeholder="Type here..."
-          />
+      <TextInput
+        style={styles.input}
+        value={input}
+        onChangeText={setInput}
+        placeholder="Type here..."
+      />
 
-          <Button title="Send" onPress={sendMessage} />
-          <Button title="Close" onPress={() => setChatOpen(false)} />
+      <Button title="Send" onPress={sendMessage} />
+      <Button title="Close" onPress={() => setChatOpen(false)} />
 
-        </View>
-      </Modal>
+    </View>
+  </KeyboardAvoidingView>
+</Modal>
 
       <StatusBar style="auto" />
     </View>
